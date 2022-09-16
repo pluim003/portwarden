@@ -1,3 +1,4 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/Sierra1011/portwarden)](https://goreportcard.com/report/github.com/Sierra1011/portwarden)
 # PortWarden
 
 
