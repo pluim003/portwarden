@@ -1,4 +1,4 @@
-module github.com/vwxyzjn/portwarden
+module github.com/Sierra1011/portwarden
 
 go 1.14
 

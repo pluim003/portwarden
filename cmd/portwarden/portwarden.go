@@ -9,7 +9,7 @@ import (
 	"os/exec"
 	"sort"
 
-	"github.com/vwxyzjn/portwarden"
+	"github.com/Sierra1011/portwarden"
 	cli "gopkg.in/urfave/cli.v1"
 )
 

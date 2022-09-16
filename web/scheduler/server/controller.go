@@ -4,10 +4,10 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/Sierra1011/portwarden/web"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis"
 	"github.com/imdario/mergo"
-	"github.com/vwxyzjn/portwarden/web"
 	"golang.org/x/oauth2"
 )
 
@@ -86,7 +86,7 @@ func CancelEncryptBackupHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": MsgSuccessfullyCancelledBackingUp})
 }
 
-//TODO: GoogleDriveHandler() will return Json with the google login url
+// TODO: GoogleDriveHandler() will return Json with the google login url
 // Not sure if it's supposed to call UploadFile() directly
 func (ps *PortwardenServer) GetGoogleDriveLoginURLHandler(c *gin.Context) {
 	c.JSON(200, gin.H{
