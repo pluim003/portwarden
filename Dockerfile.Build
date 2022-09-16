@@ -12,8 +12,8 @@ ENV Salt $Salt
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 
 # Setup work directory
-COPY . /go/src/github.com/vwxyzjn/portwarden
-WORKDIR /go/src/github.com/vwxyzjn/portwarden
+COPY . /go/src/github.com/Sierra1011/portwarden
+WORKDIR /go/src/github.com/Sierra1011/portwarden
 
 # Install Go Dep
 RUN wget -q https://github.com/golang/dep/releases/download/v0.4.1/dep-linux-amd64
@@ -26,10 +26,10 @@ RUN chmod +x /usr/bin/bw
 
 # Run dep
 # Notice git is the dependency for running dep
-RUN cd /go/src/github.com/vwxyzjn/portwarden && dep ensure --vendor-only
-RUN go run /go/src/github.com/vwxyzjn/portwarden/utils/generate_salt_file.go
-RUN go build /go/src/github.com/vwxyzjn/portwarden/web/worker/main.go && mv ./main /worker
-RUN go build /go/src/github.com/vwxyzjn/portwarden/web/scheduler/main.go && mv ./main /scheduler
+RUN cd /go/src/github.com/Sierra1011/portwarden && dep ensure --vendor-only
+RUN go run /go/src/github.com/Sierra1011/portwarden/utils/generate_salt_file.go
+RUN go build /go/src/github.com/Sierra1011/portwarden/web/worker/main.go && mv ./main /worker
+RUN go build /go/src/github.com/Sierra1011/portwarden/web/scheduler/main.go && mv ./main /scheduler
 
 # Ready to run
 EXPOSE 5000
@@ -37,10 +37,10 @@ EXPOSE 5000
 FROM debian:stretch-20220622 as production
 RUN apt-get update && apt-get install -y ca-certificates openssl
 COPY --from=builder /usr/bin/bw /usr/bin/bw
-COPY --from=builder /scheduler /go/src/github.com/vwxyzjn/portwarden/web/scheduler/scheduler
-COPY --from=builder /worker /go/src/github.com/vwxyzjn/portwarden/web/worker/worker
-COPY --from=builder /go/src/github.com/vwxyzjn/portwarden/web/portwardenCredentials.json /go/src/github.com/vwxyzjn/portwarden/web/portwardenCredentials.json
-RUN chmod +x /go/src/github.com/vwxyzjn/portwarden/web/scheduler/scheduler
-RUN chmod +x /go/src/github.com/vwxyzjn/portwarden/web/worker/worker
-WORKDIR /go/src/github.com/vwxyzjn/portwarden
+COPY --from=builder /scheduler /go/src/github.com/Sierra1011/portwarden/web/scheduler/scheduler
+COPY --from=builder /worker /go/src/github.com/Sierra1011/portwarden/web/worker/worker
+COPY --from=builder /go/src/github.com/Sierra1011/portwarden/web/portwardenCredentials.json /go/src/github.com/Sierra1011/portwarden/web/portwardenCredentials.json
+RUN chmod +x /go/src/github.com/Sierra1011/portwarden/web/scheduler/scheduler
+RUN chmod +x /go/src/github.com/Sierra1011/portwarden/web/worker/worker
+WORKDIR /go/src/github.com/Sierra1011/portwarden
 EXPOSE 5000

@@ -346,7 +346,7 @@ func BWGetAllAttachments(outputDir, sessionKey string, pws []PortWardenElement, 
 	for _, item := range pws {
 		if len(item.Attachments) > 0 {
 			for _, innerItem := range item.Attachments {
-				ourputDir := strings.TrimSpace(outputDir + item.Name) // Keep this line. See https://github.com/vwxyzjn/portwarden/issues/10
+				ourputDir := strings.TrimSpace(outputDir + item.Name) // Keep this line. See https://github.com/Sierra1011/portwarden/issues/10
 				err := BWGetAttachment(ourputDir+"/", item.ID, innerItem.ID, sessionKey)
 				time.Sleep(time.Millisecond * time.Duration(sleepMilliseconds))
 				if err != nil {

@@ -10,8 +10,8 @@ ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 
 # Setup work directory
-COPY . /go/src/github.com/vwxyzjn/portwarden
-WORKDIR /go/src/github.com/vwxyzjn/portwarden
+COPY . /go/src/github.com/Sierra1011/portwarden
+WORKDIR /go/src/github.com/Sierra1011/portwarden
 
 # Install Go Dep
 RUN wget -q https://github.com/golang/dep/releases/download/v0.4.1/dep-linux-amd64

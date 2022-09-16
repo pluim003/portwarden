@@ -8,7 +8,7 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: vwxyzjn/portwarden-server-prod
+    repo: Sierra1011/portwarden-server-prod
     dockerfile: Dockerfile.Build
     target: production
     salt:

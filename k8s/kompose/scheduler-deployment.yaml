@@ -25,13 +25,13 @@ spec:
         env:
         - name: BITWARDENCLI_APPDATA_DIR
           value: /BitwardenCLI
-        image: vwxyzjn/portwarden-base:1.6.0
+        image: Sierra1011/portwarden-base:1.6.0
         name: scheduler
         ports:
         - containerPort: 5000
         resources: {}
         stdin: true
         tty: true
-        workingDir: /go/src/github.com/vwxyzjn/portwarden/web/scheduler
+        workingDir: /go/src/github.com/Sierra1011/portwarden/web/scheduler
       restartPolicy: Always
 status: {}

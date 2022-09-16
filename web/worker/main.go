@@ -7,9 +7,9 @@ import (
 
 	"github.com/davecgh/go-spew/spew"
 
-	"github.com/vwxyzjn/portwarden"
-	"github.com/vwxyzjn/portwarden/web"
-	"github.com/vwxyzjn/portwarden/web/scheduler/server"
+	"github.com/Sierra1011/portwarden"
+	"github.com/Sierra1011/portwarden/web"
+	"github.com/Sierra1011/portwarden/web/scheduler/server"
 )
 
 func main() {

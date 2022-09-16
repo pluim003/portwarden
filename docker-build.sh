@@ -1,5 +1,5 @@
 VersionTag="$(git describe --always --exact-match --tags $(git log -n1 --pretty='%h'))"
-Repo="vwxyzjn/portwarden-server-prod"
+Repo="Sierra1011/portwarden-server-prod"
 docker version
 
 if [ -z "$VersionTag" ]  # If git version tag is empty

@@ -3,16 +3,16 @@ version: '3'
 services:
 
   salt_generator:
-    image: vwxyzjn/portwarden-server-dev:v0.1.1
+    image: Sierra1011/portwarden-server-dev:v0.1.1
     environment:
       - Salt=${Salt}
     volumes:
-      - .:/go/src/github.com/vwxyzjn/portwarden
+      - .:/go/src/github.com/Sierra1011/portwarden
     command:
       go run ./utils/generate_salt_file.go
 
   scheduler:
-    image: vwxyzjn/portwarden-server-dev:v0.1.1
+    image: Sierra1011/portwarden-server-dev:v0.1.1
     stdin_open: true
     tty: true
     environment:
@@ -23,9 +23,9 @@ services:
     ports:
       - 5000:5000
     volumes:
-      - .:/go/src/github.com/vwxyzjn/portwarden
+      - .:/go/src/github.com/Sierra1011/portwarden
     working_dir:
-      /go/src/github.com/vwxyzjn/portwarden/web/scheduler
+      /go/src/github.com/Sierra1011/portwarden/web/scheduler
 
   redis:
     image: redis
@@ -33,7 +33,7 @@ services:
       - 6379:6379
 
   worker:
-    image: vwxyzjn/portwarden-server-dev:v0.1.1
+    image: Sierra1011/portwarden-server-dev:v0.1.1
     stdin_open: true
     tty: true
     environment:
@@ -45,9 +45,9 @@ services:
       mode: replicated
       replicas: 2
     volumes:
-      - .:/go/src/github.com/vwxyzjn/portwarden
+      - .:/go/src/github.com/Sierra1011/portwarden
     working_dir:
-      /go/src/github.com/vwxyzjn/portwarden/web/worker
+      /go/src/github.com/Sierra1011/portwarden/web/worker
 
   redis-commander:
     image: rediscommander/redis-commander:latest
@@ -58,7 +58,7 @@ services:
     - "8081:8081"
 
   frontend:
-    image: vwxyzjn/portwarden-frontend:0.1.1
+    image: Sierra1011/portwarden-frontend:0.1.1
     restart: always
     ports:
     - "8000:8000"

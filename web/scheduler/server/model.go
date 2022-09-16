@@ -11,8 +11,8 @@ import (
 	"time"
 
 	"github.com/RichardKnop/machinery/v1/tasks"
-	"github.com/vwxyzjn/portwarden"
-	"github.com/vwxyzjn/portwarden/web"
+	"github.com/Sierra1011/portwarden"
+	"github.com/Sierra1011/portwarden/web"
 	"golang.org/x/oauth2"
 )
 
