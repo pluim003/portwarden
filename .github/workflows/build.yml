@@ -1,4 +1,4 @@
-concurrency: ci-${{ github.ref }}-listener
+concurrency: ci-${{ github.ref }}
 
 name: Docker build
 
