@@ -33,7 +33,7 @@ jobs:
     - name: Get latest version
       id: version
       run: |
-        VER=$(bw --version)
+        VER=$(/home/runner/work/bw --version)
         echo "version=$VER" >> $GITHUB_ENV
 
     - name: Write latest version to file
