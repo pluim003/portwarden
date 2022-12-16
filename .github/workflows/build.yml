@@ -3,8 +3,8 @@ concurrency: ci-${{ github.ref }}
 name: Docker build
 
 on:
-  pull_request:
-  push:
+  #pull_request:
+  #push:
     #paths: [/**]
   workflow_dispatch:
 
