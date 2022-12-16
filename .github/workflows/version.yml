@@ -24,7 +24,10 @@ jobs:
 
     - name: Install CLI
       run: |
-        curl --silent --location https://vault.bitwarden.com/download/?app=cli&platform=linux | unzip
+        URL="https://vault.bitwarden.com/download/?app=cli&platform=linux"
+        wget "$URL" -O bw.zip | unzip
+        chmod +x ./bw
+        ./bw --version
 
     - name: Get latest version
       id: version
