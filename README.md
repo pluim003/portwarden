@@ -1,4 +1,4 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/Sierra1011/portwarden)](https://goreportcard.com/report/github.com/Sierra1011/portwarden)
+[![Go Report Card](https://goreportcard.com/badge/github.com/pluim003/portwarden)](https://goreportcard.com/report/github.com/pluim003/portwarden)
 # PortWarden
 
 
@@ -7,9 +7,13 @@ This project creates encrypted backups for [Bitwarden](https://bitwarden.com/) v
 
 It addresses this issue in the community forum https://community.bitwarden.com/t/encrypted-export/235, but hopefully Bitwarden will come up with official solutions soon.
 
-## 3/28/20 Update
+## March 15th, 2023 Update
 
-We now support restoring the backup to an empty account, including attachments.
+This is the repository to build the Docker-images for the arm64-platform, to be used f.e. on a Raspberry Pi.
+For the amd64-platform please use https://github.com/Sierra1011/portwarden.
+
+Note: at this moment I haven't thoroughly tested the working of thie repository. So far I was able to create the image (which is quite large) and start the container. Now I have to figure out how everything works.
+
 
 # Disclaimer
 Note that you **may lose your data** if you try the restore feature and I am not responsible. Use the free software at your own discretion.  Since we don't handle restoration conflicts,  **make sure to back up with your main account and restore to a spare/alternative account**. 
@@ -17,7 +21,7 @@ Note that you **may lose your data** if you try the restore feature and I am not
 
 ## Usage Of Portwarden CLI
 
-Go to https://github.com/bitwarden/cli/releases to download the latest version of Bitwarden CLI and place the executable `bw`/`bw.exe` in your `PATH`. Then, go to https://github.com/Sierra1011/portwarden/releases/ to download the latest release of `portwarden`. Now just follow these steps :
+Go to https://github.com/bitwarden/cli/releases to download the latest version of Bitwarden CLI and place the executable `bw`/`bw.exe` in your `PATH`. Then, go to https://github.com/pluim003/portwarden/releases/ to download the latest release of `portwarden`. Now just follow these steps :
 
 
 ```bash
@@ -78,16 +82,16 @@ docker-compose up -d # Spin up required containers
 docker ps # checkout the running containers
 # $ docker ps
 # CONTAINER ID        IMAGE                                   COMMAND                  CREATED             STATUS              PORTS                    NAMES
-# e9bbc7263189        Sierra1011/portwarden-base:1.1.0           "/bin/bash"              15 seconds ago      Up 12 seconds       0.0.0.0:5000->5000/tcp   portwarden_scheduler_1
-# f44247d80881        Sierra1011/portwarden-base:1.1.0           "go run main.go"         15 seconds ago      Up 12 seconds       5000/tcp                 portwarden_worker_1
-# 37deb1556391        Sierra1011/portwarden-frontend:1.0.1       "/bin/sh -c 'npm run…"   17 seconds ago      Up 14 seconds       0.0.0.0:8000->8000/tcp   portwarden_frontend_1
+# e9bbc7263189        pluim003/portwarden-server:latest       "/bin/bash"              15 seconds ago      Up 12 seconds       0.0.0.0:5000->5000/tcp   portwarden_scheduler_1
+# f44247d80881        pluim003/portwarden-server:latest       "go run main.go"         15 seconds ago      Up 12 seconds       5000/tcp                 portwarden_worker_1
+# 37deb1556391        pluim003/portwarden-frontend:latest     "/bin/sh -c 'npm run…"   17 seconds ago      Up 14 seconds       0.0.0.0:8000->8000/tcp   portwarden_frontend_1
 # 6ab98b5515f1        redis                                   "docker-entrypoint.s…"   17 seconds ago      Up 14 seconds       0.0.0.0:6379->6379/tcp   portwarden_redis_1
 # 78618bb157d2        rediscommander/redis-commander:latest   "/usr/bin/dumb-init …"   17 seconds ago      Up 14 seconds       0.0.0.0:8081->8081/tcp   portwarden_redis-commander_1
 
 docker exec -it portwarden_scheduler_1 bash # get into scheduler container and do whatever you want.
 
 # $ docker exec -it portwarden_scheduler_1 bash
-# root@582b98fa1a25:/go/src/github.com/Sierra1011/portwarden/web/scheduler# go run main.go
+# root@582b98fa1a25:/go/src/github.com/pluim003/portwarden/web/scheduler# go run main.go
 # (string) (len=24) "Scheduler Server Started"
 # [GIN-debug] [WARNING] Now Gin requires Go 1.6 or later and Go 1.7 will be required soon.
 
@@ -97,13 +101,13 @@ docker exec -it portwarden_scheduler_1 bash # get into scheduler container and d
 #  - using env:   export GIN_MODE=release
 #  - using code:  gin.SetMode(gin.ReleaseMode)
 
-# [GIN-debug] GET    /                         --> github.com/Sierra1011/portwarden/web/scheduler/server.(*PortwardenServer).Run.func1 (4 handlers)
-# [GIN-debug] POST   /decrypt                  --> github.com/Sierra1011/portwarden/web/scheduler/server.DecryptBackupHandler (4 handlers)
-# [GIN-debug] GET    /gdrive/loginUrl          --> github.com/Sierra1011/portwarden/web/scheduler/server.(*PortwardenServer).GetGoogleDriveLoginURLHandler-fm (4 handlers)
-# [GIN-debug] GET    /gdrive/login             --> github.com/Sierra1011/portwarden/web/scheduler/server.(*PortwardenServer).GetGoogleDriveLoginHandler-fm (4 handlers)
-# [GIN-debug] GET    /test/TokenAuthMiddleware --> github.com/Sierra1011/portwarden/web/scheduler/server.(*PortwardenServer).Run.func2 (5 handlers)
-# [GIN-debug] POST   /encrypt                  --> github.com/Sierra1011/portwarden/web/scheduler/server.EncryptBackupHandler (5 handlers)
-# [GIN-debug] POST   /encrypt/cancel           --> github.com/Sierra1011/portwarden/web/scheduler/server.CancelEncryptBackupHandler (5 handlers)
+# [GIN-debug] GET    /                         --> github.com/pluim003/portwarden/web/scheduler/server.(*PortwardenServer).Run.func1 (4 handlers)
+# [GIN-debug] POST   /decrypt                  --> github.com/pluim003/portwarden/web/scheduler/server.DecryptBackupHandler (4 handlers)
+# [GIN-debug] GET    /gdrive/loginUrl          --> github.com/pluim003/portwarden/web/scheduler/server.(*PortwardenServer).GetGoogleDriveLoginURLHandler-fm (4 handlers)
+# [GIN-debug] GET    /gdrive/login             --> github.com/pluim003/portwarden/web/scheduler/server.(*PortwardenServer).GetGoogleDriveLoginHandler-fm (4 handlers)
+# [GIN-debug] GET    /test/TokenAuthMiddleware --> github.com/pluim003/portwarden/web/scheduler/server.(*PortwardenServer).Run.func2 (5 handlers)
+# [GIN-debug] POST   /encrypt                  --> github.com/pluim003/portwarden/web/scheduler/server.EncryptBackupHandler (5 handlers)
+# [GIN-debug] POST   /encrypt/cancel           --> github.com/pluim003/portwarden/web/scheduler/server.CancelEncryptBackupHandler (5 handlers)
 # [GIN-debug] Listening and serving HTTP on :5000
 ```
 
