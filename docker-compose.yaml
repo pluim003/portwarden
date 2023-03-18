@@ -1,9 +1,12 @@
 version: '3'
 
+volumes: 
+  BitwardenCLI:
+
 services:
 
   salt_generator:
-    image: Sierra1011/portwarden-server-dev:v0.1.1
+    image: pluim003/portwarden-server-dev:latest
     environment:
       - Salt=${Salt}
     volumes:
@@ -12,7 +15,7 @@ services:
       go run ./utils/generate_salt_file.go
 
   scheduler:
-    image: Sierra1011/portwarden-server-dev:v0.1.1
+    image: pluim003/portwarden-server-dev:latest
     stdin_open: true
     tty: true
     environment:
@@ -24,6 +27,7 @@ services:
       - 5000:5000
     volumes:
       - .:/go/src/github.com/Sierra1011/portwarden
+      - BitwardenCLI:/BitwardenCLI
     working_dir:
       /go/src/github.com/Sierra1011/portwarden/web/scheduler
 
@@ -33,7 +37,7 @@ services:
       - 6379:6379
 
   worker:
-    image: Sierra1011/portwarden-server-dev:v0.1.1
+    image: pluim003/portwarden-server-dev:latest
     stdin_open: true
     tty: true
     environment:
@@ -46,6 +50,7 @@ services:
       replicas: 2
     volumes:
       - .:/go/src/github.com/Sierra1011/portwarden
+      - BitwardenCLI:/BitwardenCLI
     working_dir:
       /go/src/github.com/Sierra1011/portwarden/web/worker
 
@@ -55,10 +60,10 @@ services:
     environment:
     - REDIS_HOSTS=local:redis:6379
     ports:
-    - "8081:8081"
+    - "8182:8182"
 
   frontend:
-    image: Sierra1011/portwarden-frontend:0.1.1
+    image: pluim003/portwarden-frontend:latest
     restart: always
     ports:
-    - "8000:8000"
+    - "8001:8001"
